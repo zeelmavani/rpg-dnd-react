@@ -26,11 +26,11 @@
   color: white;
 }
 
-.App-section {
+/* .App-section {
   flex: 1 1 0;
   background-color: hsl(220deg 13% 13%);
   color: white;
-}
+} */
 
 .App-link {
   color: #61dafb;
@@ -43,4 +43,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.p-2{
+  padding: 2rem;
 }
