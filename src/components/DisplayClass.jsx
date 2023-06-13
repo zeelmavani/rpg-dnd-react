@@ -14,7 +14,7 @@ export function DisplayClass({character, onClassSelection}) {
     // console.log(CLASS_LIST, classRequirements, className);
     return Object.keys(classRequirements).every(
       (attributeKey) =>
-        character.attributes[attributeKey] >=
+        character.attributes[attributeKey].currentPoints >=
         classRequirements[attributeKey]
     );
   };
