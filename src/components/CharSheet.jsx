@@ -79,7 +79,7 @@ export function CharSheet() {
         attributeModifier,
       });
       if (remainingPoints >= 0) {
-        character.skillLevels[name].points += points;
+        character.skillLevels[name].currentPoints += points;
         currentAttribute.remainingPoints = remainingPoints;
       } else {
         // Display error message or handle insufficient skill points
@@ -136,19 +136,19 @@ export function CharSheet() {
                   character.attributes[attributeModifier].currentPoints
                 );
                 const totalSkillValue =
-                  character.skillLevels[name].points + abilityModifier;
+                  character.skillLevels[name].currentPoints + abilityModifier;
                 console.log("skill", name);
                 console.log(
                   "skill value",
                   character,
-                  character.skillLevels[name].points
+                  character.skillLevels[name].currentPoints
                 );
                 console.log("totalSkillValue", totalSkillValue);
 
                 return (
                   <ListItem key={name}>
                     <Typography>
-                      {`${name} - points: ${character.skillLevels[name].points} [+] [-] modifier (${attributeModifier}): ${abilityModifier} total: ${totalSkillValue}`}
+                      {`${name} - points: ${character.skillLevels[name].currentPoints} [+] [-] modifier (${attributeModifier}): ${abilityModifier} total: ${totalSkillValue}`}
                     </Typography>
                     <Button
                       variant="outlined"
