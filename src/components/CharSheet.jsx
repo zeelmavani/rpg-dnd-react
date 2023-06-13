@@ -1,19 +1,9 @@
-import {
-  Button,
-  Grid,
-  List,
-  ListItem,
-  TextField,
-  Typography,
-} from "@material-ui/core";
+import { Button, Grid, TextField, Typography } from "@material-ui/core";
 import React, { useState } from "react";
-import { ATTRIBUTE_LIST, SKILL_LIST } from "../consts";
-import {
-  calAbilityModifier,
-  generateDefaultAttrs,
-  generateDefaultSkills,
-} from "../utils";
+import { ATTRIBUTE_LIST } from "../consts";
+import { generateDefaultAttrs, generateDefaultSkills } from "../utils";
 import { DisplayClass } from "./DisplayClass";
+import { DisplaySkill } from "./DisplaySkill";
 
 export function CharSheet() {
   const [characters, setCharacters] = useState([
@@ -32,7 +22,9 @@ export function CharSheet() {
         pre[characterIndex].attributes[attribute].currentPoints;
       const updatedCharacters = [...pre];
       if (currentPoints - 1 >= 0) {
-        updatedCharacters[characterIndex].attributes[attribute].currentPoints -= 1;
+        updatedCharacters[characterIndex].attributes[
+          attribute
+        ].currentPoints -= 1;
       }
       return updatedCharacters;
     });
@@ -48,7 +40,9 @@ export function CharSheet() {
       );
       const updatedCharacters = [...pre];
       if (totalValue < 70) {
-        updatedCharacters[characterIndex].attributes[attribute].currentPoints += 1;
+        updatedCharacters[characterIndex].attributes[
+          attribute
+        ].currentPoints += 1;
         console.log("increament:updatedCharacters", updatedCharacters);
         setError("");
       } else {
@@ -98,7 +92,7 @@ export function CharSheet() {
           <Grid container spacing={3} className="p-2">
             <Typography variant="h6">Attributes:</Typography>
             {ATTRIBUTE_LIST.map((attribute) => {
-              console.log(attribute);
+            //   console.log(attribute);
               return (
                 <Grid item xs={3} key={attribute}>
                   <Typography variant="body2">{attribute}</Typography>
@@ -126,51 +120,12 @@ export function CharSheet() {
               handleClassClick(characterIndex, selectedClass)
             }
           />
-          {/* <DisplaySkill /> */}
-          <Grid container spacing={2} className="p-20">
-            <Typography variant="subtitle1">Skills:</Typography>
-            <List>
-              {SKILL_LIST.map((skill) => {
-                const { name, attributeModifier } = skill;
-                const abilityModifier = calAbilityModifier(
-                  character.attributes[attributeModifier].currentPoints
-                );
-                const totalSkillValue =
-                  character.skillLevels[name].currentPoints + abilityModifier;
-                console.log("skill", name);
-                console.log(
-                  "skill value",
-                  character,
-                  character.skillLevels[name].currentPoints
-                );
-                console.log("totalSkillValue", totalSkillValue);
-
-                return (
-                  <ListItem key={name}>
-                    <Typography>
-                      {`${name} - points: ${character.skillLevels[name].currentPoints} [+] [-] modifier (${attributeModifier}): ${abilityModifier} total: ${totalSkillValue}`}
-                    </Typography>
-                    <Button
-                      variant="outlined"
-                      onClick={() =>
-                        handleSkillPointsChange(characterIndex, skill, 1)
-                      }
-                    >
-                      +
-                    </Button>
-                    <Button
-                      variant="outlined"
-                      onClick={() =>
-                        handleSkillPointsChange(characterIndex, skill, -1)
-                      }
-                    >
-                      -
-                    </Button>
-                  </ListItem>
-                );
-              })}
-            </List>
-          </Grid>
+          <DisplaySkill
+            character={character}
+            onSkillPointsChange={(skill, opValue) =>
+              handleSkillPointsChange(characterIndex, skill, opValue)
+            }
+          />
         </Grid>
       ))}
     </Grid>

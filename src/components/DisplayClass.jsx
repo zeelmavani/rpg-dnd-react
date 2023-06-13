@@ -46,7 +46,7 @@ export function DisplayClass({character, onClassSelection}) {
       </Grid>
       {character.selectedClass && (
         <Grid item xs={4}>
-          <Typography variant="body1">
+          <Typography variant="h6">
             Minimum Config for {character.selectedClass}:
           </Typography>
           <List>
