@@ -7,3 +7,11 @@ export const generateDefaultAttrs = (defaultValue = 10) => {
     }
     return outputJson;
 };
+
+export const calAbilityModifier = (attributeValue) => {
+    return Math.round((attributeValue - 10) / 2);
+};
+export const calAvailablePoints = (attributeModifierValue) => {
+    const temp = 4 * attributeModifierValue;
+    return 10 + temp;
+};
