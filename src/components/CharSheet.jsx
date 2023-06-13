@@ -114,7 +114,24 @@ export function CharSheet() {
                 ))}
               </List>
             </Grid>
-            
+            {character.selectedClass && (
+              <Grid item xs={4}>
+                <Typography variant="body1">
+                  Minimum Config for {character.selectedClass}:
+                </Typography>
+                <List>
+                  {Object.entries(CLASS_LIST[character.selectedClass]).map(
+                    ([attribute, value]) => (
+                      <ListItem key={attribute}>
+                        <Typography variant="body2">
+                          {attribute}: {value}
+                        </Typography>
+                      </ListItem>
+                    )
+                  )}
+                </List>
+              </Grid>
+            )}
           </Grid>
         </Grid>
       ))}
